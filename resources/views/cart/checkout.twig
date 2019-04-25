@@ -1,0 +1,77 @@
+{% extends 'templates/app.twig' %}
+
+{% block content %}
+    {% include 'templates/navigation.twig' with {'categories': categories } %}
+    <div class="wrap">
+        <h2 style="text-align: center;">Сагс</h2>
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+
+            <table class="table table-hover white-bg">
+                <thead>
+                <tr>
+                    <th>Нэр</th>
+                    <th>Хэмжээ</th>
+                    <th class="text-center">Yнэ</th>
+                    <th class="text-center">Нийт</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set totalprice = 0 %}
+                {% for item in cart %}
+                    {% set totalprice = totalprice + item.totalprice %}
+                    <tr>
+                        <td class="col-sm-8 col-md-6">
+                            <div class="media">
+                                <a class="thumbnail pull-left" href="#">
+                                    <img class="media-object" src="/assets/images/{{ item.image }}"
+                                         style="width: 72px; height: 72px;"/>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="#">{{ item.name }}</a></h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-1 col-md-1" style="text-align: center">
+                            <input readonly type="text" class="form-control" id="exampleInputEmail1"
+                                   value="{{ item.quantity }}"/>
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center">
+                            <strong>{{ item.price|number_format(0, '.', ',') }}₮</strong>
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center">
+                            <strong>{{ item.totalprice|number_format(0, '.', ',') }}₮</strong>
+                        </td>
+                        <td class="col-sm-1 col-md-1">
+                            <a class="btn btn-danger" href="/index.php/cart/remove?id={{ item.id }}">
+                                <span class="glyphicon glyphicon-remove"></span> Хасах
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td> &nbsp;</td>
+                    <td> &nbsp;</td>
+                    <td> &nbsp;</td>
+                    <td><strong>Нийт</strong></td>
+                    <td class="text-right"><strong>{{ totalprice|number_format(0, '.', ',') }}₮</strong></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2">
+                        <a href="/index.php/order/create" class="btn btn-success">
+                            Худалдан авах <span class="glyphicon glyphicon-play"></span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <br />
+            <br />
+        </div>
+    </div>
+{% endblock %}

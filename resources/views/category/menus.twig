@@ -1,0 +1,24 @@
+<div class="menu">
+    <div class="mini-menu">
+        <ul>
+            <li class="">
+                <a href="/index.php">Бүх бараа</a>
+            </li>
+            {% for category in categories %}
+            <li class="">
+                <a href="/index.php/?category_id={{ category.id }}">{{ category.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="menu-size menu-item">
+        <div class="header-item">Size</div>
+        <ul class="color-row1">
+            <li class="color-circle size-circle"><p class="sizedouble">XS</p></li>
+            <li class="color-circle size-circle" style="background-color:#343534"><p style="color:#999" class="size">S</p></li>
+            <li class="color-circle size-circle"><p class="size">M</p></li>
+            <li class="color-circle size-circle"><p class="size">L</p></li>
+            <li class="color-circle size-circle"><p class="sizedouble">XL</p></li>
+        </ul>
+    </div>
+</div>

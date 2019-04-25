@@ -1,0 +1,14 @@
+<div data-price="{{ product.price }}" class="item">
+    <img src="/assets/images/{{ product.image }}" class="img-item"/>
+    <div class="info">
+        <h3 class="item-title">{{ product.name }}</h3>
+        {#<p class="descroption">{{ product.description }}</p> #}
+        <h5>
+            {{ product.price|number_format(0, '.', ',') }}₮
+            <div class="cart-action">
+                <input type="text" class="product-quantity" name="quantity" value="1" size="1"/>
+                <input data-id="{{ product.id }}" type="submit" value="Сагсанд хийх" class="product-add-cart btn btn-xs btn-default" />
+            </div>
+        </h5>
+    </div>
+</div>
