@@ -21,6 +21,7 @@ $app = new App([
         'apiBaseUrl' => 'https://mgw.test.lending.mn',
         'successUri' => '/order/success?order_id=',
         'redirectUri' => '/',
+        'dataDir' => __DIR__ . '/../data',
     ]
 ]);
 

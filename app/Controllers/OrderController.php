@@ -62,10 +62,8 @@ class OrderController extends BaseController
 
         // curl client
         $client = new CurlClient();
-
         // api client
         $api = new MerchantApi($settings['apiBaseUrl'], $client);
-
 
         // duration
         $duration = 60 * 1000;
@@ -116,30 +114,26 @@ class OrderController extends BaseController
      */
     public function success($request, $response)
     {
-        // Захиалгын дугаар
-        $orderId = $request->getQueryParam('order_id', null);
-
-        // Захиалга
-        $order = Order::query()->find($orderId);
-
         // settings
         $settings = $this->container->get('settings');
 
+        // Захиалгын дугаар
+        $orderId = $request->getQueryParam('order_id', null);
+        // Захиалга
+        $order = Order::query()->find($orderId);
+
         // curl client
         $client = new CurlClient();
-
         // api client
         $api = new MerchantApi($settings['apiBaseUrl'], $client);
 
         // Хэрэглэгчийн токэн
         $accessToken = $_SESSION['accessToken'];
-
         // Нэхэмжлэлийн дэлгэрэнгүй
         $invoice = $api->invoiceDetail($accessToken, $order->invoice_number);
 
         // Нэхэмжлэлийн длэгэрэнгүй
         $status = $invoice->status;
-
         // нэхэмжлэлийн төлөв
         switch ($status){
             //0: Хүлээгдэж байгаа
