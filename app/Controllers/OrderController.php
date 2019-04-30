@@ -107,7 +107,7 @@ class OrderController extends BaseController
     }
 
     /**
-     *
+     * Төлбөр амжилттай хийгдсэн үед дуудагдах хуудас
      * @param $request
      * @param $response
      * @return

@@ -8,6 +8,7 @@ use Exception;
 
 class CurlClient implements HttpClientInterface
 {
+    const HTTP_CODE_OK = 200;
 
     protected function initCurl($url)
     {
@@ -15,7 +16,6 @@ class CurlClient implements HttpClientInterface
         curl_setopt($curl_handle, CURLOPT_URL, $url);
         curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl_handle, CURLOPT_HEADER, false);
-        // curl_setopt($curl_handle, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
 
         return $curl_handle;
     }
@@ -44,7 +44,7 @@ class CurlClient implements HttpClientInterface
         }
 
 
-        if ($httpcode == 200 && array_key_exists('code', $result) && $result['code'] != 0) {
+        if (self::HTTP_CODE_OK == $httpcode && array_key_exists('code', $result) && 0 != $result['code']) {
             $code = $result['code'];
 
             //$message = json_encode($result);
@@ -53,7 +53,7 @@ class CurlClient implements HttpClientInterface
         }
 
         // not normal
-        if ($httpcode != 200) {
+        if (self::HTTP_CODE_OK != $httpcode) {
             throw new Exception(json_encode($result), $httpcode);
         }
 
