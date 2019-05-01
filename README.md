@@ -127,7 +127,6 @@ if ($code && $code != $lastCode) {
             'first_name' => $userInfo['firstName'],
             'last_name' => $userInfo['lastName'],
             'phone_number' => $userInfo['phoneNumber'],
-            'reg_number' => $userInfo['regNumber'],
             'email' => $userInfo['email'],
     ]);
 }
