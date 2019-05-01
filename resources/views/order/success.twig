@@ -1,0 +1,21 @@
+{% extends 'templates/app.twig' %}
+
+{% block content %}
+    {% include 'templates/navigation.twig' with {'categories': categories } %}
+    <div class="wrap">
+        <h2 style="text-align: center;">Төлбөр төлөлт</h2>
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <p>
+                <br>
+                Төлбөрийн нэхэмжлэл амжилттай үүслээ.
+                <br>
+                Таны захиалгын дугаар <b>#{{ order.id }}</b>
+                <br>
+                Таны нэхэмжлэлийн дугаар <b>#{{ order.invoice_number }}</b>
+                <br>
+                <br>
+                <br>
+            </p>
+        </div>
+    </div>
+{% endblock %}

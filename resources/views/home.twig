@@ -1,0 +1,16 @@
+{% extends 'templates/app.twig' %}
+
+{% block content %}
+    {% include 'templates/navigation.twig' with {'categories': categories } %}
+    <div class="wrap">
+        {% include 'category/menus.twig' with {'categories': categories } %}
+        <div class="items">
+            {% for product in products %}
+                {% include 'product/_item.twig' with {'product': product } %}
+            {% endfor %}
+        </div>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+{% endblock %}

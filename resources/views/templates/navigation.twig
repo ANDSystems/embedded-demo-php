@@ -1,0 +1,25 @@
+<label class="open-menu" for="menu">
+    Menu
+</label>
+<input id="menu" type="checkbox" name="menu"/>
+<div class="side-menu">
+    <label class="close" for="menu"><i class="fa fa-window-close" aria-hidden="true"></i></label>
+    <div class="side-menu-content">
+        <p><a href="/index.php">Бүх бараа</a></p>
+        {% for category in categories %}
+            <p><a href="/index.php?category_id={{ category.id }}">{{ category.name }}</a></p>
+        {% endfor %}
+    </div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header" style="width: 100%;">
+            <a class="navbar-brand" href="/index.php/">Demo Shop</a>
+
+            <a class="cart-indicator navbar-btn pull-right btn btn-default" href="/index.php/cart/checkout">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+            </a>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
