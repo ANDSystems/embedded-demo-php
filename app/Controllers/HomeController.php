@@ -64,7 +64,6 @@ class HomeController extends BaseController
                 'first_name' => $userInfo['firstName'],
                 'last_name' => $userInfo['lastName'],
                 'phone_number' => $userInfo['phoneNumber'],
-                'reg_number' => array_key_exists('regNumber', $userInfo) ? $userInfo['regNumber'] : "",
                 'email' => $userInfo['email'],
             ]);
 

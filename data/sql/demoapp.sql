@@ -116,7 +116,6 @@ CREATE TABLE `user` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `phone_number` varchar(50) NOT NULL,
-  `reg_number` varchar(50) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
@@ -126,8 +125,8 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `user_id`, `first_name`, `last_name`, `phone_number`, `reg_number`, `email`, `created_at`, `updated_at`) VALUES
-(1, 'io7M9/wCe08qEgzphL9v0A==', 'Od', 'Test', '99928626', 'ЖЖ88112233', NULL, '2019-04-24 19:31:33', '2019-04-24 19:31:33');
+INSERT INTO `user` (`id`, `user_id`, `first_name`, `last_name`, `phone_number`, `email`, `created_at`, `updated_at`) VALUES
+(1, 'io7M9/wCe08qEgzphL9v0A==', 'Od', 'Test', '99928626', NULL, '2019-04-24 19:31:33', '2019-04-24 19:31:33');
 
 --
 -- Indexes for dumped tables
