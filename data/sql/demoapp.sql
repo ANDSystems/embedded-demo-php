@@ -99,10 +99,10 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`id`, `category_id`, `subcategory_id`, `name`, `description`, `price`, `image`) VALUES
 (1, 1, 4, 'Эмэгтэй ноосон цамц', 'lorem ipsum', 30000, '1.jpg'),
-(2, 1, 4, 'Эмэгтэй сорочкон цамц', 'lorem ipsum lorem ipsum lorem ipsum', 80000, '1.jpg'),
-(3, 1, 4, 'Эмэгтэй ноосон цамц', 'lorem ipsum', 35000, '1.jpg'),
-(4, 2, 6, 'Эрэгтэй ноосон цамц', 'lorem ipsum', 30000, '1.jpg'),
-(5, 2, 6, 'Эрэгтэй цамц', 'lorem ipsum', 35000, '1.jpg');
+(2, 1, 4, 'Эмэгтэй сорочкон цамц', 'lorem ipsum lorem ipsum lorem ipsum', 80000, '2.jpg'),
+(3, 1, 4, 'Эмэгтэй ноосон цамц', 'lorem ipsum', 35000, '3.jpg'),
+(4, 2, 6, 'Эрэгтэй ноосон цамц', 'lorem ipsum', 30000, '4.jpg'),
+(5, 2, 6, 'Эрэгтэй цамц', 'lorem ipsum', 35000, '5.jpg');
 
 -- --------------------------------------------------------
 
