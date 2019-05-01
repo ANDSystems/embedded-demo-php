@@ -1,11 +1,7 @@
 <?php
 
 
-//$app->get('/home', function ($request, $response) {
-//    return $this->view->render($response, 'home.twig');
-//});
-
-//
+// homepage
 $app->get('/', 'HomeController:index');
 
 // cart
@@ -20,9 +16,5 @@ $app->get('/order/success', 'OrderController:success');
 $app->get('/order/list', 'OrderController:list');
 
 
-// lend mn web hook
+// lend webhook
 $app->get('/webhook', 'WebhookController:index');
-
-
-
-//$app->get('/get', 'HomeController:getall');
