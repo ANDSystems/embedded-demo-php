@@ -25,6 +25,11 @@ class OrderController extends BaseController
         $settings = $this->container->get('settings');
 
         // TODO check user is exist in session
+        if (!array_key_exists('accessToken', $_SESSION) || !array_key_exists('userInfo', $_SESSION)) {
+            return $this->container->view->render($response, '403.twig', [
+                'categories' => Category::query()->whereNull('parent_id')->get(),
+            ]);
+        }
 
         // Хэрэглэгчийн токэн
         $accessToken = $_SESSION['accessToken'];
@@ -36,7 +41,7 @@ class OrderController extends BaseController
         // base url
         $uri = $request->getUri();
         $baseUrl = $uri->getBaseUrl();
-        $fullUrl = (string) $baseUrl;
+        $fullUrl = (string)$baseUrl;
 
         // todo
         $cart = [];
@@ -135,7 +140,7 @@ class OrderController extends BaseController
         // Нэхэмжлэлийн длэгэрэнгүй
         $status = $invoice->status;
         // нэхэмжлэлийн төлөв
-        switch ($status){
+        switch ($status) {
             //0: Хүлээгдэж байгаа
             case 0:
                 $order->status = Order::STATUS_PENDING;
@@ -170,7 +175,8 @@ class OrderController extends BaseController
      * @param $response
      * @return
      */
-    public function list($request, $response){
+    public function list($request, $response)
+    {
         // Хэрэглэгчийн мэдээлэл
         $userInfo = $_SESSION['userInfo'];
 
