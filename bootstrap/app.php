@@ -1,6 +1,8 @@
 <?php
 
-
+use App\Classes\LendMNApi\CurlHttpClient;
+use App\Classes\LendMNApi\MerchantApi;
+use Illuminate\Database\Capsule\Manager;
 use Slim\App;
 use Slim\Container;
 
@@ -40,7 +42,7 @@ $container['view'] = function ($container) {
 };
 
 //boot eloquent connection
-$capsule = new \Illuminate\Database\Capsule\Manager;
+$capsule = new Manager;
 $capsule->addConnection($container['settings']['db']);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
@@ -52,6 +54,21 @@ $container['db'] = function (Container $container) use ($capsule){
 $container['session'] = function (Container $container) {
     return new Session();
 };
+
+$container['api'] = function($container) {
+    $logger = new \Monolog\Logger('my_logger');
+    $file_handler = new \Monolog\Handler\StreamHandler('../logs/app.log');
+    $logger->pushHandler($file_handler);
+
+    // curl client
+    $client = new CurlHttpClient($logger);
+
+    // api client
+    $api = new MerchantApi($container['settings']['apiBaseUrl'], $client);
+
+    return $api;
+};
+
 
 //
 $container['HomeController'] = function ($container) {

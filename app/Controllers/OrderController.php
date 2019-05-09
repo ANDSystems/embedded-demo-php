@@ -7,13 +7,9 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Category;
 
-use App\Classes\LendMNApi\CurlClient;
-use App\Classes\LendMNApi\MerchantApi;
 
 class OrderController extends BaseController
 {
-
-
     /**
      * Захиалга үүсгэх
      * @param $request
@@ -64,12 +60,6 @@ class OrderController extends BaseController
             'status' => Order::STATUS_PENDING,
         ]);
 
-
-        // curl client
-        $client = new CurlClient();
-        // api client
-        $api = new MerchantApi($settings['apiBaseUrl'], $client);
-
         // duration
         $duration = 60 * 1000;
 
@@ -83,7 +73,7 @@ class OrderController extends BaseController
         $trackingData = $order->id;
 
         // нэхэмжлэл үүсгэх
-        $invoice = $api->createInvoice($accessToken, $amount, $duration, $description, $successUri, $trackingData);
+        $invoice = $this->container->api->createInvoice($accessToken, $amount, $duration, $description, $successUri, $trackingData);
 
 
         // update нэхэмжлэлийн дугаар
@@ -127,15 +117,10 @@ class OrderController extends BaseController
         // Захиалга
         $order = Order::query()->find($orderId);
 
-        // curl client
-        $client = new CurlClient();
-        // api client
-        $api = new MerchantApi($settings['apiBaseUrl'], $client);
-
         // Хэрэглэгчийн токэн
         $accessToken = $_SESSION['accessToken'];
         // Нэхэмжлэлийн дэлгэрэнгүй
-        $invoice = $api->invoiceDetail($accessToken, $order->invoice_number);
+        $invoice = $this->container->api->invoiceDetail($accessToken, $order->invoice_number);
 
         // Нэхэмжлэлийн длэгэрэнгүй
         $status = $invoice->status;
@@ -175,7 +160,7 @@ class OrderController extends BaseController
      * @param $response
      * @return
      */
-    public function list($request, $response)
+    public function orderList($request, $response)
     {
         // Хэрэглэгчийн мэдээлэл
         $userInfo = $_SESSION['userInfo'];

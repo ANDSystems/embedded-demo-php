@@ -7,8 +7,6 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
 
-use App\Classes\LendMNApi\CurlClient;
-use App\Classes\LendMNApi\MerchantApi;
 
 class HomeController extends BaseController
 {
@@ -22,7 +20,6 @@ class HomeController extends BaseController
         $baseUrl = $uri->getBaseUrl();
         $fullUrl = (string) $baseUrl;
 
-
         // embed code
         $code = $request->getQueryParam('code', null);
 
@@ -35,20 +32,14 @@ class HomeController extends BaseController
             $clientSecret = $settings['clientSecret'];
             $redirectUri = $fullUrl . $settings['redirectUri'];
 
-            // curl client
-            $client = new CurlClient();
-
-            // api client
-            $api = new MerchantApi($settings['apiBaseUrl'], $client);
-
             // хэрэглэгчийн access token авах
-            $accessToken = $api->getAccessToken($code, $clientId, $clientSecret, $redirectUri);
+            $accessToken = $this->container->api->getAccessToken($code, $clientId, $clientSecret, $redirectUri);
 
             // нэвтрэх access token session-д хадгална
             $_SESSION['accessToken'] = $accessToken['accessToken'];
 
             // хэрэглэгчийн мэдээлэл авах
-            $userInfo = $api->userInfo($accessToken['accessToken']);
+            $userInfo = $this->container->api->userInfo($accessToken['accessToken']);
 
             // Хэрэглэгчийн мэдээлэл сешионд хадгалах
             $_SESSION['userInfo'] = $userInfo;
