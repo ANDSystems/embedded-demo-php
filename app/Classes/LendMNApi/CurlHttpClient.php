@@ -1,14 +1,28 @@
 <?php
 
-
-
 namespace App\Classes\LendMNApi;
 
 use Exception;
+use Psr\Log\LoggerInterface;
 
-class CurlClient implements HttpClientInterface
+class CurlHttpClient implements HttpClientInterface
 {
     const HTTP_CODE_OK = 200;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * CurlHttpClient constructor.
+     *
+     * @param \Psr\Log\LoggerInterface $logger
+     */
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
 
     protected function initCurl($url)
     {
@@ -35,6 +49,9 @@ class CurlClient implements HttpClientInterface
         $result = json_decode($buffer, true);
 
         curl_close($curl_handle);
+
+        $now = \DateTime::createFromFormat('U.u', microtime(true));
+        $this->logger->info('['.$now->format("m-d-Y H:i:s.u") . '] RESPONSE: ' . json_encode($result, JSON_UNESCAPED_UNICODE));
 
         // error occured while initializing curl
         if ($errno) {
@@ -65,6 +82,12 @@ class CurlClient implements HttpClientInterface
         $header = isset($options['header']) ? $options['header'] : [];
         $data = isset($options['data']) ? $options['data'] : [];
 
+
+        $now = \DateTime::createFromFormat('U.u', microtime(true));
+        $this->logger->info("=========================================================================================================");
+        $this->logger->info('['.$now->format("m-d-Y H:i:s.u") . '] POST: ' . $url);
+        $this->logger->info('['.$now->format("m-d-Y H:i:s.u") . '] PARAMS: ' . json_encode($data, JSON_UNESCAPED_UNICODE));
+
         // init curl
         $curl_handle = $this->initCurl($url);
 
@@ -81,6 +104,11 @@ class CurlClient implements HttpClientInterface
     {
         $header = isset($options['header']) ? $options['header'] : [];
         $data = isset($options['data']) ? $options['data'] : [];
+
+        $now = \DateTime::createFromFormat('U.u', microtime(true));
+        $this->logger->info("=========================================================================================================");
+        $this->logger->info('['.$now->format("m-d-Y H:i:s.u") . '] GET: ' . $url);
+        $this->logger->info('['.$now->format("m-d-Y H:i:s.u") . '] PARAMS: ' . json_encode($data, JSON_UNESCAPED_UNICODE));
 
         // command url
         $url = $url . (count($data) ? '?' . http_build_query($data, '', '&') : '');
@@ -101,6 +129,11 @@ class CurlClient implements HttpClientInterface
     {
         $header = isset($options['header']) ? $options['header'] : [];
         $data = isset($options['data']) ? $options['data'] : [];
+
+        $now = \DateTime::createFromFormat('U.u', microtime(true));
+        $this->logger->info("=========================================================================================================");
+        $this->logger->info('['.$now->format("m-d-Y H:i:s.u") . '] DELETE: ' . $url);
+        $this->logger->info('['.$now->format("m-d-Y H:i:s.u") . '] PARAMS: ' . json_encode($data, JSON_UNESCAPED_UNICODE));
 
         // init curl
         $curl_handle = $this->initCurl($url);

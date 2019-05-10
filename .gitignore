@@ -1,3 +1,4 @@
 vendor
 .idea
 demo-app.zip
+logs/app.log
