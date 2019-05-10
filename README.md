@@ -187,7 +187,7 @@ Yүсгэсэн invoice ашиглаад хэрэглэгчдэд төлбөр �
     </p>
     <div id="and-ds">
         <script type="text/javascript">
-            ANDDS.button({
+            ANDembedded.button({
                 "container": "and-ds",
                 "invoiceNumber": "{{ invoice['invoiceNumber'] }}",
                 "amount": "{{ order['amount'] }}",
