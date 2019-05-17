@@ -13,16 +13,15 @@ $app = new App([
             'driver' => 'mysql',
             'host' => 'localhost',
             'database' => 'demoapp',
-            'username' => 'root',
-            'password' => 'rootpass',
+            'username' => '',                           // demo app руу хандах username, заавал тохируулж өгөх шаардлагатай
+            'password' => '',                           // demo app руу хандах password, заавал тохируулж өгөх шаардлагатай
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
         ],
-        'clientId' => '42_6d4m6d8kqjggkkocs4o80gw84sgocskk8s4ckcw0k4ogcgwscw',
-        'clientSecret' => 'ebv097t2lhwsgscs84kkk8oss4w084o8cg088cwgw40c0sc08',
+        'clientId' => '',                               // мерчантын clientId, заавал тохируулж өгөх шаардлагатай
+        'clientSecret' => '',                           // мерчантын clientSecret, заавал тохируулж өгөх шаардлагатай
         'apiBaseUrl' => 'https://mgw.test.lending.mn',
         'successUri' => '/order/success?order_id=',
-        'redirectUri' => '/',
         'dataDir' => __DIR__ . '/../data',
     ]
 ]);

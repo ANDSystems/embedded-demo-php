@@ -17,8 +17,6 @@ class HomeController extends BaseController
 
         // base url
         $uri = $request->getUri();
-        $baseUrl = $uri->getBaseUrl();
-        $fullUrl = (string) $baseUrl;
 
         // embed code
         $code = $request->getQueryParam('code', null);
@@ -30,7 +28,7 @@ class HomeController extends BaseController
         if ($code && $code != $lastCode) {
             $clientId = $settings['clientId'];
             $clientSecret = $settings['clientSecret'];
-            $redirectUri = $fullUrl . $settings['redirectUri'];
+            $redirectUri = preg_replace('/(\?|\&)code=([0-9a-z]+)$/i', '', (string) $uri);
 
             // хэрэглэгчийн access token авах
             $accessToken = $this->container->api->getAccessToken($code, $clientId, $clientSecret, $redirectUri);
