@@ -126,7 +126,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `user_id`, `first_name`, `last_name`, `phone_number`, `email`, `created_at`, `updated_at`) VALUES
-(1, 'io7M9/wCe08qEgzphL9v0A==', 'Od', 'Test', '99928626', NULL, '2019-04-24 19:31:33', '2019-04-24 19:31:33');
+(1, 'io7M9/wCe08qEgzphL9v0A==', 'Firstname', 'Lastname', '123456578', NULL, '2019-04-24 19:31:33', '2019-04-24 19:31:33');
 
 --
 -- Indexes for dumped tables
